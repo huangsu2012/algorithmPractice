@@ -1,4 +1,4 @@
-package com.huangsu.algorithm.struct.graph;
+package com.huangsu.algorithm.struct.graph.di;
 
 import com.huangsu.algorithm.struct.Collection;
 import com.huangsu.algorithm.struct.queue.LinkedQueue;
@@ -7,16 +7,16 @@ import com.huangsu.algorithm.struct.st.ST;
 import com.huangsu.algorithm.struct.st.SeparateChainingHashST;
 
 /**
- * Created by huangsu2012@gmail.com on 2021/4/2.
+ *
  */
-public class SimpleSymbolGraph<K> implements SymbolGraph<K> {
+public class SimpleSymbolDigraph<K> implements SymbolDigraph<K> {
 
   private final ST<K, Integer> symbolIndexTable;
   private final K[] symbols;
-  private final Graph g;
+  private final Digraph g;
 
   @SuppressWarnings("unchecked")
-  public SimpleSymbolGraph(Collection<K> vertexes) {
+  public SimpleSymbolDigraph(Collection<K> vertexes) {
     int count = 0;
     symbolIndexTable = new SeparateChainingHashST<>(vertexes.size());
     for (K k : vertexes) {
@@ -26,7 +26,7 @@ public class SimpleSymbolGraph<K> implements SymbolGraph<K> {
       symbolIndexTable.put(k, count++);
     }
     symbols = (K[]) new Object[count];
-    g = new AdjacencyListGraph(count);
+    g = new AdjacencyListDigraph(count);
     for (K k : symbolIndexTable.keys()) {
       symbols[symbolIndexTable.get(k)] = k;
     }
@@ -86,7 +86,7 @@ public class SimpleSymbolGraph<K> implements SymbolGraph<K> {
   }
 
   @Override
-  public Graph G() {
+  public Digraph G() {
     return g;
   }
 }

@@ -1,11 +1,11 @@
-package com.huangsu.algorithm.struct.graph;
+package com.huangsu.algorithm.struct.graph.di;
 
 /**
- * Created by huangsu2012@gmail.com on 2021/4/2.
+ * Created by huangsu2012@gmail.com on 2021/4/16.
  *
- * 用符号作为顶点的图API
+ * 用符号作为顶点的有向图API
  */
-public interface SymbolGraph<K> {
+public interface SymbolDigraph<K> {
 
   /**
    * @return 顶点数
@@ -44,5 +44,5 @@ public interface SymbolGraph<K> {
 
   boolean contains(K key);
 
-  Graph G();
+  Digraph G();
 }

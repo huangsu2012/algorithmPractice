@@ -48,7 +48,7 @@ public class LinkedBag<T> implements Bag<T> {
 
     @Override
     public boolean hasNext() {
-      return current.next != null;
+      return current != null;
     }
 
     @Override

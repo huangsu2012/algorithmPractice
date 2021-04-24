@@ -26,26 +26,59 @@ public class Cycle {
     for (int s = 0; s < g.V(); s++) {
       if (!marked[s]) {
         stack.push(s);
+        int u = s;
         while (!stack.isEmpty()) {
+          if (hasCycle) {
+            return;
+          }
           int v = stack.pop();
           marked[v] = true;
           for (int w : g.adj(v)) {
             if (!marked[w]) {
               stack.push(w);
-            } else if (w != s) {//不等于起点又已经访问过，说明绕回到了之前访问过的点，也就是存在环
+              u = v;
+            } else if (w != u) {//不等于上一个被访问点又已经访问过，说明绕回到了之前访问过的点，也就是存在环
               hasCycle = true;
-              break;
             }
           }
-        }
-        if (hasCycle) {
-          break;
         }
       }
     }
   }
 
+//  private void findCycle() {
+//    for (int s = 0; s < g.V(); s++) {
+//      if (!marked[s]) {
+//        dfs(s, s);
+//      }
+//    }
+//  }
+//
+//  private void dfs(int v, int u) {
+//    marked[v] = true;
+//    for (int w : g.adj(v)) {
+//      if (!marked[w]) {
+//        dfs(w, v);
+//      } else if (w != u) {
+//        hasCycle = true;
+//      }
+//    }
+//  }
+
   public boolean hasCycle() {
     return hasCycle;
+  }
+
+  public static void main(String[] args) {
+    Graph graph = new AdjacencyListGraph(7);
+    graph.addEdge(0, 5);
+    graph.addEdge(0, 6);
+    graph.addEdge(0, 1);
+    graph.addEdge(0, 2);
+    graph.addEdge(5, 3);
+    graph.addEdge(5, 4);
+    graph.addEdge(3, 4);
+    graph.addEdge(6, 4);
+    System.out.println(new Cycle(graph).hasCycle());
   }
 }

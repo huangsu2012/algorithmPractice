@@ -23,9 +23,7 @@ public interface ST<Key, Value> {
    */
   Value get(Key key);
 
-  default void delete(Key key) {
-    put(key, null);
-  }
+  void delete(Key key);
 
   /**
    * 键key在表中是否存在
@@ -33,9 +31,7 @@ public interface ST<Key, Value> {
    * @param key 键
    * @return true如果键存在于表中
    */
-  default boolean contains(Key key) {
-    return get(key) != null;
-  }
+  boolean contains(Key key);
 
   /**
    * @return 表中所有键的集合

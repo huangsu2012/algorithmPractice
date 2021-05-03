@@ -63,6 +63,16 @@ public class SequentialSearchST<Key, Value> implements ST<Key, Value> {
   }
 
   @Override
+  public boolean contains(Key key) {
+    for (Node node = head; node != null; node = node.next) {
+      if (node.key.equals(key)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @Override
   public Iterable<Key> keys() {
     return new SequentialSearchSTKeyIterable();
   }

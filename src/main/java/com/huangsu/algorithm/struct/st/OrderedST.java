@@ -5,7 +5,7 @@ package com.huangsu.algorithm.struct.st;
  *
  * 有序符号表抽象
  */
-public interface OrderedST<Key extends Comparable<Key>, Value> extends ST<Key, Value> {
+public interface OrderedST<Key, Value> extends ST<Key, Value> {
 
   /**
    * @return 最小的键
@@ -44,31 +44,19 @@ public interface OrderedST<Key extends Comparable<Key>, Value> extends ST<Key, V
   /**
    * 删除最小的键
    */
-  default void deleteMin() {
-    delete(min());
-  }
+  void deleteMin();
 
   /**
    * 删除最大的键
    */
-  default void deleteMax() {
-    delete(max());
-  }
+  void deleteMax();
 
   /**
    * @param lo 键区间下限；包含
    * @param hi 键区间上限；包含
    * @return [lo..hi] 之间的键的数量
    */
-  default int size(Key lo, Key hi) {
-    if (hi.compareTo(lo) < 0) {
-      return 0;
-    } else if (contains(hi)) {
-      return rank(hi) - rank(lo) + 1;
-    } else {
-      return rank(hi) - rank(lo);
-    }
-  }
+  int size(Key lo, Key hi);
 
   /**
    * @param lo 键区间下限；包含
@@ -76,9 +64,4 @@ public interface OrderedST<Key extends Comparable<Key>, Value> extends ST<Key, V
    * @return [lo..hi] 之间的所有键，已排序
    */
   Iterable<Key> keys(Key lo, Key hi);
-
-  @Override
-  default Iterable<Key> keys() {
-    return keys(min(), max());
-  }
 }

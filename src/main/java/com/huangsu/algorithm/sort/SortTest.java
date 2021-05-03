@@ -9,7 +9,7 @@ public class SortTest {
 
   public static void main(String[] args) {
     String[] sortTypes = new String[]{"insert", "select", "shell", "bubble", "merge1", "merge2",
-        "merge3", "mergeBU", "quick", "binaryHeap", "binaryHeap2", "binaryHeap3"};
+        "merge3", "mergeBU", "quick", "quick2", "binaryHeap", "binaryHeap2", "binaryHeap3"};
     for (String sortType : sortTypes) {
       sort(sortType);
     }
@@ -48,6 +48,9 @@ public class SortTest {
         break;
       case "quick":
         QuickSort.sort(items);
+        break;
+      case "quick2":
+        QuickSort2.sort(items);
         break;
       case "binaryHeap":
         BinaryHeapSort.sort(items);

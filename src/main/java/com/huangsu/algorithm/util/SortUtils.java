@@ -1,5 +1,7 @@
 package com.huangsu.algorithm.util;
 
+import java.util.Comparator;
+
 /**
  * Created by huangsu2012@gmail.com on 2018/3/31.
  */
@@ -47,5 +49,23 @@ public abstract class SortUtils {
       return 1;
     }
     return key1.compareTo(key2);
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T> int compareTo(T key1, T key2, Comparator<T> comparator) {
+    if (comparator != null) {
+      return comparator.compare(key1, key2);
+    }
+    if (key1 == key2) {
+      return 0;
+    }
+    if (key1 == null) {
+      return -1;
+    }
+    if (key2 == null) {
+      return 1;
+    }
+    Comparable<? super T> key1Comp = (Comparable<? super T>) key1;
+    return key1Comp.compareTo(key2);
   }
 }

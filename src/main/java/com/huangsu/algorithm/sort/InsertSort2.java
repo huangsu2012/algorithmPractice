@@ -10,7 +10,11 @@ import com.huangsu.algorithm.util.SortUtils;
 public class InsertSort2 {
 
   public static <T extends Comparable<T>> void sort(T[] items) {
-    for (int i = 1; i < items.length; i++) {
+    sort(items, 0, items.length - 1);
+  }
+
+  public static <T extends Comparable<T>> void sort(T[] items, int lo, int hi) {
+    for (int i = lo + 1; i <= hi; i++) {
       T item = items[i];
       int j = i;
       for (; j > 0 && SortUtils.less(item, items[j - 1]);

@@ -16,7 +16,8 @@ public class BinarySearch {
   public static <T extends Comparable<T>> int find(T[] items, T toFind) {
     if (items != null && items.length > 0 && toFind != null) {
       int low = 0;
-      int high = items.length;
+      //此处如果不减一，当toFind大于数组任意元素时将抛出ArrayIndexOutOfBoundsException,如果不减一就把循环条件改成low<high也行
+      int high = items.length - 1;
       for (; low <= high; ) {
         int mid = low + (high - low) / 2;
         T midItem = items[mid];
@@ -44,7 +45,7 @@ public class BinarySearch {
   public static <T extends Comparable<T>> int findFirst(T[] items, T toFind) {
     if (items != null && items.length > 0 && toFind != null) {
       int low = 0;
-      int high = items.length;
+      int high = items.length - 1;
       for (; low <= high; ) {
         int mid = low + (high - low) / 2;
         T midItem = items[mid];
@@ -75,7 +76,7 @@ public class BinarySearch {
   public static <T extends Comparable<T>> int findLast(T[] items, T toFind) {
     if (items != null && items.length > 0 && toFind != null) {
       int low = 0;
-      int high = items.length;
+      int high = items.length - 1;
       for (; low <= high; ) {
         int mid = low + (high - low) / 2;
         T midItem = items[mid];
@@ -106,7 +107,7 @@ public class BinarySearch {
   public static <T extends Comparable<T>> int findGEFirst(T[] items, T toFind) {
     if (items != null && items.length > 0 && toFind != null) {
       int low = 0;
-      int high = items.length;
+      int high = items.length - 1;
       for (; low <= high; ) {
         int mid = low + (high - low) / 2;
         T midItem = items[mid];
@@ -135,7 +136,7 @@ public class BinarySearch {
   public static <T extends Comparable<T>> int findLELast(T[] items, T toFind) {
     if (items != null && items.length > 0 && toFind != null) {
       int low = 0;
-      int high = items.length;
+      int high = items.length - 1;
       for (; low <= high; ) {
         int mid = low + (high - low) / 2;
         T midItem = items[mid];
@@ -167,7 +168,7 @@ public class BinarySearch {
 //  public static <T extends Comparable<T>> int findRotatedSorted(T[] items, T toFind){
 //    if (items != null && items.length > 0 && toFind != null) {
 //      int low = 0;
-//      int high = items.length;
+//      int high = items.length-1;
 //      for (; low <= high; ) {
 //        int mid = low + (high - low) / 2;
 //        T midItem = items[mid];
@@ -177,7 +178,7 @@ public class BinarySearch {
 //  }
 
   public static void main(String[] args) {
-    Integer[] integers = new Integer[]{1, 3, 5, 7, 8, 8, 8,8, 9};
+    Integer[] integers = new Integer[]{1, 3, 5, 7, 8, 8, 8, 8, 9};
     System.out.println(find(integers, 8));
     System.out.println(findFirst(integers, 8));
     System.out.println(findLast(integers, 8));

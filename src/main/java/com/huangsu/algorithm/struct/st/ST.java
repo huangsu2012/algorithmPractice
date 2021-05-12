@@ -1,14 +1,16 @@
 package com.huangsu.algorithm.struct.st;
 
+import java.util.Iterator;
+
 /**
  * Created by huangsu2012@gmail.com on 2021/2/21.
  *
  * 符号表抽象
  */
-public interface ST<Key, Value> {
+public interface ST<Key, Value> extends SetCollection<Key> {
 
   /**
-   * 将键值对存入表中，若值为空则将键删除
+   * 将键值对存入表中
    *
    * @param key 键
    * @param value 值
@@ -23,22 +25,7 @@ public interface ST<Key, Value> {
    */
   Value get(Key key);
 
-  void delete(Key key);
 
-  /**
-   * 键key在表中是否存在
-   *
-   * @param key 键
-   * @return true如果键存在于表中
-   */
-  boolean contains(Key key);
 
-  /**
-   * @return 表中所有键的集合
-   */
-  Iterable<Key> keys();
 
-  boolean isEmpty();
-
-  int size();
 }

@@ -2,6 +2,7 @@ package com.huangsu.algorithm.struct.st;
 
 import com.huangsu.algorithm.struct.queue.LinkedQueue;
 import com.huangsu.algorithm.struct.queue.Queue;
+import com.huangsu.algorithm.struct.st.AbstractSkipListOrdered.SkipListNode;
 import com.huangsu.algorithm.util.SortUtils;
 import java.util.Comparator;
 import java.util.Random;
@@ -375,5 +376,88 @@ public abstract class AbstractSkipListOrdered<Key, Value, Node extends SkipListN
   @Override
   public boolean isEmpty() {
     return size == 0;
+  }
+
+
+  protected static class SkipListNode<Key, Node extends SkipListNode<Key, Node>> {
+
+    protected Key key;
+
+    protected Node backward;
+
+    protected SkipListNodeLevel<Key, Node>[] levels;
+
+    @SuppressWarnings("unchecked")
+    protected SkipListNode(Key key, int level) {
+      this.key = key;
+      levels = (SkipListNodeLevel<Key, Node>[]) new SkipListNodeLevel[level];
+    }
+
+
+    protected void updateLevelByCopyForward(int l, Node toCopy, int span) {
+      Node forwardNode = null;
+      if (toCopy.levels.length > l && toCopy.levels[l] != null) {
+        forwardNode = toCopy.levels[l].forward;
+        if (span < 0) {
+          span = toCopy.levels[l].span;
+        }
+      }
+      if (span < 0) {
+        span = 0;
+      }
+      updateLevel(l, forwardNode, span);
+    }
+
+    protected void updateLevel(int l, Node forwardNode, int span) {
+      if (l < levels.length) {
+        if (levels[l] == null) {
+          levels[l] = new SkipListNodeLevel<>(span, forwardNode);
+        } else {
+          levels[l].forward = forwardNode;
+          levels[l].span = span;
+        }
+      }
+    }
+
+    protected Node forwardNode(int l) {
+      return l >= levels.length || levels[l] == null ? null : levels[l].forward;
+    }
+  }
+
+  protected static class SkipListNodeLevel<Key, Node extends SkipListNode<Key, Node>> {
+
+    /**
+     * 表示当前的节点跨越了多少个节点。span用于计算元素排名(rank)
+     */
+    protected int span;
+    /**
+     * 当前层级的下一个节点
+     */
+    protected Node forward;
+
+
+    protected SkipListNodeLevel(int span,
+        Node forward) {
+      this.span = span;
+      this.forward = forward;
+    }
+  }
+
+  protected static class SkipListNodeSet<Key> extends SkipListNode<Key, SkipListNodeSet<Key>> {
+
+    protected SkipListNodeSet(Key key, int level) {
+      super(key, level);
+    }
+  }
+
+  protected static class SkipListNodeST<Key, Value> extends
+      SkipListNode<Key, SkipListNodeST<Key, Value>> {
+
+    protected Value value;
+
+    protected SkipListNodeST(Key key, Value value, int level) {
+      super(key, level);
+      this.value = value;
+    }
   }
 }

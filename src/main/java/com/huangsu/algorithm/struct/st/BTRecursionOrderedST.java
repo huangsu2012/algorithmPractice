@@ -1,7 +1,7 @@
 package com.huangsu.algorithm.struct.st;
 
 
-import com.huangsu.algorithm.util.SortUtils;
+import com.huangsu.algorithm.struct.st.AbstractSetCollectionOrderedBT.BTNodeST;
 import java.util.Comparator;
 
 /**
@@ -10,7 +10,7 @@ import java.util.Comparator;
  * 基于二叉查找树的有序符号表递归实现
  */
 public class BTRecursionOrderedST<Key, Value> extends
-    AbstractBTRecursionOrderedST<Key, Value, BTNode<Key, Value>> implements
+    AbstractSetCollectionOrderedBTNodeRecursion<Key, Value, BTNodeST<Key, Value>> implements
     OrderedST<Key, Value> {
 
   public BTRecursionOrderedST() {
@@ -21,68 +21,10 @@ public class BTRecursionOrderedST<Key, Value> extends
   }
 
   @Override
-  public void deleteMin() {
-    tree = deleteMin(tree);
+  protected BTNodeST<Key, Value> insertCreateNode(Key key, Value value) {
+    return new BTNodeST<>(key, value, 1);
   }
 
-  private BTNode<Key, Value> deleteMin(BTNode<Key, Value> node) {
-    if (node == null) {
-      return null;
-    }
-    if (node.left == null) {
-      return node.right;
-    }
-    node.left = deleteMin(node.left);
-    node.nodeCount = size(node.left) + size(node.right) + 1;
-    return node;
-  }
-
-  @Override
-  public void deleteMax() {
-    tree = deleteMax(tree);
-  }
-
-  private BTNode<Key, Value> deleteMax(BTNode<Key, Value> node) {
-    if (node == null) {
-      return null;
-    }
-    if (node.right == null) {
-      return node.left;
-    }
-    node.right = deleteMin(node.right);
-    node.nodeCount = size(node.left) + size(node.right) + 1;
-    return node;
-  }
-
-  @Override
-  public void delete(Key key) {
-    tree = delete(key, tree);
-  }
-
-  private BTNode<Key, Value> delete(Key key, BTNode<Key, Value> node) {
-    if (node == null) {
-      return null;
-    }
-    int compareVal = SortUtils.compareTo(node.key, key, keyComparator);
-    if (compareVal > 0) {
-      node.left = delete(key, node.left);
-    } else if (compareVal < 0) {
-      node.right = delete(key, node.right);
-    } else {
-      if (node.right == null) {
-        return node.left;
-      }
-      if (node.left == null) {
-        return node.right;
-      }
-      BTNode<Key, Value> t = node;
-      node = min(t.right);
-      node.left = t.left;
-      node.right = deleteMin(t.right);
-    }
-    node.nodeCount = size(node.left) + size(node.right) + 1;
-    return node;
-  }
 
   /**
    * 递归实现
@@ -92,12 +34,13 @@ public class BTRecursionOrderedST<Key, Value> extends
    */
   @Override
   public void put(Key key, Value value) {
-    tree = put(tree, key, value);
+    tree = insert(tree, key, value);
   }
-
 
   @Override
-  BTNode<Key, Value> newNode(Key key, Value value) {
-    return new BTNode<>(key, value, 1);
+  public Value get(Key key) {
+    BTNodeST<Key, Value> node = get(key, tree);
+    return node == null ? null : node.value;
   }
+
 }

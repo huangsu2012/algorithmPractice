@@ -1,9 +1,6 @@
 package com.huangsu.algorithm.struct.st;
 
 
-import com.huangsu.algorithm.struct.queue.LinkedQueue;
-import com.huangsu.algorithm.struct.queue.Queue;
-import com.huangsu.algorithm.util.SortUtils;
 import java.util.Comparator;
 
 /**
@@ -11,12 +8,11 @@ import java.util.Comparator;
  *
  * 基于二分查找的有序符号表实现
  */
-public class BinarySearchOrderedST<Key, Value> extends AbstractOrderedST<Key, Value> implements
+public class BinarySearchOrderedST<Key, Value> extends
+    AbstractSetCollectionOrderedBinarySearch<Key> implements
     OrderedST<Key, Value> {
 
-  private Key[] keys;
   private Value[] values;
-  private int size;
 
   public BinarySearchOrderedST(int initialCapacity) {
     this(initialCapacity, null);
@@ -24,59 +20,10 @@ public class BinarySearchOrderedST<Key, Value> extends AbstractOrderedST<Key, Va
 
   @SuppressWarnings("unchecked")
   public BinarySearchOrderedST(int initialCapacity, Comparator<Key> comparator) {
-    super(comparator);
-    keys = (Key[]) new Object[initialCapacity];
+    super(initialCapacity, comparator);
     values = (Value[]) new Object[initialCapacity];
   }
 
-  @Override
-  public Key min() {
-    return keys[0];
-  }
-
-  @Override
-  public Key max() {
-    return keys[size - 1];
-  }
-
-  @Override
-  public Key floor(Key key) {
-    int i = rank(key);
-    if (keys[i].equals(key)) {
-      return key;
-    } else if (i > 0) {
-      return keys[i - 1];
-    }
-    return null;
-  }
-
-  @Override
-  public Key ceiling(Key key) {
-    int i = rank(key);
-    return keys[i];
-  }
-
-  @Override
-  public int rank(Key key) {
-    int low = 0, high = size - 1, mid = low + (high - low) / 2;
-    while (high >= low) {
-      int compareVal = SortUtils.compareTo(keys[mid], key, keyComparator);
-      if (compareVal > 0) {
-        high = mid - 1;
-      } else if (compareVal < 0) {
-        low = mid + 1;
-      } else {
-        return mid;
-      }
-      mid = low + (high - low) / 2;
-    }
-    return low;
-  }
-
-  @Override
-  public Key select(int k) {
-    return k < size && k > -1 ? keys[k] : null;
-  }
 
   @Override
   public void deleteMin() {
@@ -97,26 +44,6 @@ public class BinarySearchOrderedST<Key, Value> extends AbstractOrderedST<Key, Va
     --size;
   }
 
-  @Override
-  public int size(Key lo, Key hi) {
-    int loIndex = rank(lo);
-    int hiIndex = rank(hi);
-    int offset = keys[hiIndex].equals(hi) ? 1 : 0;
-    return hiIndex - loIndex + offset;
-  }
-
-  @Override
-  public Iterable<Key> keys(Key lo, Key hi) {
-    Queue<Key> queue = new LinkedQueue<>();
-    int hiIndex = rank(hi);
-    for (int i = rank(lo); i < hiIndex; i++) {
-      queue.enqueue(keys[i]);
-    }
-    if (keys[hiIndex].equals(hi)) {
-      queue.enqueue(hi);
-    }
-    return queue;
-  }
 
   @Override
   public void put(Key key, Value value) {
@@ -158,18 +85,5 @@ public class BinarySearchOrderedST<Key, Value> extends AbstractOrderedST<Key, Va
     }
   }
 
-  @Override
-  public boolean contains(Key key) {
-    int i = rank(key);
-    return keys[i].equals(key);
-  }
 
-  @Override
-  public Iterable<Key> keys() {
-    Queue<Key> queue = new LinkedQueue<>();
-    for (int i = 0; i < size; i++) {
-      queue.enqueue(keys[i]);
-    }
-    return queue;
-  }
 }

@@ -2,6 +2,7 @@ package com.huangsu.algorithm.struct.st;
 
 import com.huangsu.algorithm.struct.queue.LinkedQueue;
 import com.huangsu.algorithm.struct.queue.Queue;
+import com.huangsu.algorithm.struct.st.AbstractSetCollectionOrderedBT.AbstractBTNode;
 import com.huangsu.algorithm.struct.stack.LinkedStack;
 import com.huangsu.algorithm.struct.stack.Stack;
 import com.huangsu.algorithm.util.SortUtils;
@@ -9,19 +10,17 @@ import java.util.Comparator;
 
 /**
  * Created by huangsu2012@gmail.com on 2021/4/7.
+ *
+ * 二叉查找树键查询相关方法实现抽象
  */
-abstract class AbstractBTOrderedST<Key, Value, Node extends AbstractBTNode<Key, Value, Node>> implements
-    OrderedST<Key, Value> {
+abstract class AbstractSetCollectionOrderedBTImpl<Key, Node extends AbstractBTNode<Key, Node>> extends
+    AbstractSetCollectionOrderedBT<Key, Node> {
 
-  Node tree;
-  final Comparator<Key> keyComparator;
-
-  public AbstractBTOrderedST() {
-    this(null);
+  public AbstractSetCollectionOrderedBTImpl() {
   }
 
-  public AbstractBTOrderedST(Comparator<Key> keyComparator) {
-    this.keyComparator = keyComparator;
+  public AbstractSetCollectionOrderedBTImpl(Comparator<Key> comparator) {
+    super(comparator);
   }
 
   @Override
@@ -162,13 +161,7 @@ abstract class AbstractBTOrderedST<Key, Value, Node extends AbstractBTNode<Key, 
   }
 
 
-  @Override
-  public Value get(Key key) {
-    Node node = get(key, tree);
-    return node == null ? null : node.value;
-  }
-
-  private Node get(Key key, Node tree) {
+  protected Node get(Key key, Node tree) {
     Node node = tree;
     int compareVal;
     while (node != null) {

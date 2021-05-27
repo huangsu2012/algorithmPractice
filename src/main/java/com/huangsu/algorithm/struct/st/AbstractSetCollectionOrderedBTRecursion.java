@@ -2,27 +2,24 @@ package com.huangsu.algorithm.struct.st;
 
 import com.huangsu.algorithm.struct.queue.LinkedQueue;
 import com.huangsu.algorithm.struct.queue.Queue;
+import com.huangsu.algorithm.struct.st.AbstractSetCollectionOrderedBT.AbstractBTNode;
 import com.huangsu.algorithm.util.SortUtils;
 import java.util.Comparator;
 
 /**
  * Created by huangsu2012@gmail.com on 2021/4/7.
  *
- * 二叉查找树递归实现抽象
+ * 二叉查找树键查询相关方法递归实现实现抽象
  */
-abstract class AbstractBTRecursionOrderedST<Key, Value, Node extends AbstractBTNode<Key, Value, Node>> implements
-    OrderedST<Key, Value> {
+abstract class AbstractSetCollectionOrderedBTRecursion<Key, Node extends AbstractBTNode<Key, Node>> extends
+    AbstractSetCollectionOrderedBT<Key, Node> {
 
 
-  Node tree;
-  final Comparator<Key> keyComparator;
-
-  public AbstractBTRecursionOrderedST() {
-    this(null);
+  public AbstractSetCollectionOrderedBTRecursion() {
   }
 
-  public AbstractBTRecursionOrderedST(Comparator<Key> comparator) {
-    this.keyComparator = comparator;
+  public AbstractSetCollectionOrderedBTRecursion(Comparator<Key> comparator) {
+    super(comparator);
   }
 
   @Override
@@ -185,18 +182,13 @@ abstract class AbstractBTRecursionOrderedST<Key, Value, Node extends AbstractBTN
   }
 
 
-  @Override
-  public Value get(Key key) {
-    return get(key, tree);
-  }
-
-  private Value get(Key key, Node node) {
+  protected Node get(Key key, Node node) {
     if (node == null) {
       return null;
     }
     int compareVal = SortUtils.compareTo(node.key, key, keyComparator);
     if (compareVal == 0) {
-      return node.value;
+      return node;
     } else if (compareVal > 0) {
       return get(key, node.left);
     } else {
@@ -225,24 +217,6 @@ abstract class AbstractBTRecursionOrderedST<Key, Value, Node extends AbstractBTN
   }
 
 
-  Node put(Node node, Key key, Value value) {
-    if (node == null) {
-      return newNode(key, value);
-    }
-    int compareVal = SortUtils.compareTo(node.key, key, keyComparator);
-    if (compareVal == 0) {
-      node.value = value;
-    } else if (compareVal > 0) {
-      node.left = put(node.left, key, value);
-    } else {
-      node.right = put(node.right, key, value);
-    }
-    node.nodeCount = size(node.left) + size(node.right) + 1;
-    return node;
-  }
-
-  abstract Node newNode(Key key, Value value);
-
   private int size(Key lo, Key hi, Node node) {
     if (node == null) {
       return 0;
@@ -264,7 +238,7 @@ abstract class AbstractBTRecursionOrderedST<Key, Value, Node extends AbstractBTN
     return s;
   }
 
-  int size(Node node) {
+  protected int size(Node node) {
     return node == null ? 0 : node.nodeCount;
   }
 }

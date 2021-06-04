@@ -193,6 +193,24 @@ public abstract class AbstractRWayTrieStringSetCollection<Value, Node extends RW
     return null;
   }
 
+  @SuppressWarnings("unchecked")
+  @Override
+  protected void insertReplaceNodeValue(Node node, Value value) {
+    if (node instanceof RWayTrieNodeST) {
+      ((RWayTrieNodeST<Value>) node).value = value;
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  protected boolean isKeyEndCh(Node node) {
+    if (node instanceof RWayTrieNodeST) {
+      return ((RWayTrieNodeST<Value>) node).value != null;
+    } else if (node instanceof RWayTrieNodeSet) {
+      return ((RWayTrieNodeSet) node).endCh;
+    }
+    return false;
+  }
 
   protected static class RWayTrieNode<Node extends RWayTrieNode<Node>> implements TrieNode {
 

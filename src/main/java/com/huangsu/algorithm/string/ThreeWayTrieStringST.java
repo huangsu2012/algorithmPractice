@@ -8,29 +8,14 @@ import com.huangsu.algorithm.string.AbstractThreeWayTrieStringSetCollection.Thre
  * 三向单词查找树实现
  */
 public class ThreeWayTrieStringST<Value> extends
-    AbstractThreeWayTrieStringSetCollection<Value, ThreeWayTrieNodeST<Value>> implements StringST<Value> {
+    AbstractThreeWayTrieStringSetCollection<Value, ThreeWayTrieNodeST<Value>> implements
+    StringST<Value> {
 
 
   public ThreeWayTrieStringST() {
 
   }
 
-  @Override
-  protected ThreeWayTrieNodeST<Value> insertCreateNode(Value value) {
-    ThreeWayTrieNodeST<Value> node = new ThreeWayTrieNodeST<>();
-    node.value = value;
-    return node;
-  }
-
-  @Override
-  protected void insertReplaceNodeValue(ThreeWayTrieNodeST<Value> node, Value value) {
-    node.value = value;
-  }
-
-  @Override
-  protected boolean isKeyEndCh(ThreeWayTrieNodeST<Value> node) {
-    return node.value != null;
-  }
 
   @Override
   public void put(String s, Value value) {
@@ -43,5 +28,11 @@ public class ThreeWayTrieStringST<Value> extends
     return node == null ? null : node.value;
   }
 
+  @Override
+  protected ThreeWayTrieNodeST<Value> insertCreateNode(Value value) {
+    ThreeWayTrieNodeST<Value> node = new ThreeWayTrieNodeST<>();
+    node.value = value;
+    return node;
+  }
 
 }

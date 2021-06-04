@@ -232,6 +232,24 @@ public abstract class AbstractThreeWayTrieStringSetCollection<Value, Node extend
     return node != null;
   }
 
+  @SuppressWarnings("unchecked")
+  @Override
+  protected void insertReplaceNodeValue(Node node, Value value) {
+    if (node instanceof ThreeWayTrieNodeST) {
+      ((ThreeWayTrieNodeST<Value>) node).value = value;
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  protected boolean isKeyEndCh(Node node) {
+    if (node instanceof ThreeWayTrieNodeST) {
+      return ((ThreeWayTrieNodeST<Value>) node).value != null;
+    } else if (node instanceof ThreeWayTrieNodeSet) {
+      return ((ThreeWayTrieNodeSet) node).isEndCh;
+    }
+    return false;
+  }
 
   protected static class ThreeWayTrieNode<Node extends ThreeWayTrieNode<Node>> implements TrieNode {
 

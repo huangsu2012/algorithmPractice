@@ -15,21 +15,6 @@ public class TrieStringST<Value> extends
     super(R);
   }
 
-  @Override
-  protected RWayTrieNodeST<Value> insertCreateNode(Value value) {
-    return new RWayTrieNodeST<>(R, value);
-  }
-
-  @Override
-  protected void insertReplaceNodeValue(RWayTrieNodeST<Value> node, Value value) {
-    node.value = value;
-  }
-
-  @Override
-  protected boolean isKeyEndCh(RWayTrieNodeST<Value> node) {
-    return node.value != null;
-  }
-
 
   @Override
   public void put(String s, Value value) {
@@ -42,5 +27,10 @@ public class TrieStringST<Value> extends
     return node == null ? null : node.value;
   }
 
+
+  @Override
+  protected RWayTrieNodeST<Value> insertCreateNode(Value value) {
+    return new RWayTrieNodeST<>(R, value);
+  }
 
 }

@@ -13,20 +13,6 @@ public class TrieStringSet extends
     super(r);
   }
 
-  @Override
-  protected RWayTrieNodeSet insertCreateNode(Void aVoid) {
-    return new RWayTrieNodeSet(R, false);
-  }
-
-  @Override
-  protected void insertReplaceNodeValue(RWayTrieNodeSet node, Void aVoid) {
-    node.endCh = true;
-  }
-
-  @Override
-  protected boolean isKeyEndCh(RWayTrieNodeSet node) {
-    return node.endCh;
-  }
 
   @Override
   public boolean add(String s) {
@@ -34,4 +20,8 @@ public class TrieStringSet extends
   }
 
 
+  @Override
+  protected RWayTrieNodeSet insertCreateNode(Void aVoid) {
+    return new RWayTrieNodeSet(R, false);
+  }
 }

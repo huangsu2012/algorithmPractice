@@ -39,12 +39,12 @@
 - [x] 位图 BitIntByteST
 
 #### [集合Set](https://github.com/huangsu2012/algorithmPractice/blob/master/src/main/java/com/huangsu/algorithm/struct/st)
-- [x] 基于链表的集合SequentialSearchSet
-- [x] 基于二分查找的有序集合BinarySearchOrderedSet
-- [x] 基于二叉树的有序集合BTOrderedSet
+- [x] 基于链表的集合 SequentialSearchSet
+- [x] 基于二分查找的有序集合 BinarySearchOrderedSet
+- [x] 基于二叉树的有序集合 BTOrderedSet
 - [ ] 基于红黑树的有序集合
-- [x] 基于跳表的有序集合SkipListOrderedSet
-- [x] 基于hash算法的集合SeparateChainingHashSet
+- [x] 基于跳表的有序集合 SkipListOrderedSet
+- [x] 基于hash算法的集合 SeparateChainingHashSet
 
 #### [优先队列PriorityQueue](https://github.com/huangsu2012/algorithmPractice/blob/master/src/main/java/com/huangsu/algorithm/struct/priorityqueue)
 - [x] 基于二叉堆实现的大顶堆 ArrayHeapMaxPriorityQueue  
@@ -58,7 +58,7 @@
 
 #### [无向图](https://github.com/huangsu2012/algorithmPractice/blob/master/src/main/java/com/huangsu/algorithm/struct/graph)
 - [x] 无向图邻接矩阵实现 AdjacencyMatrixGraph
-- [x] 无向图邻接表实现AdjacencyListGraph
+- [x] 无向图邻接表实现 AdjacencyListGraph
 - [x] 无向图符号图 SimpleSymbolGraph
 - [x] 无向图广度优先搜索单点可达性 BreadthFirstSearch
 - [x] 无向图深度优先搜索单点可达性 DepthFirstSearch
@@ -103,27 +103,27 @@
 - [ ] 套汇问题 
 - [ ] 最大网络流问题
 ### [字符串相关](https://github.com/huangsu2012/algorithmPractice/blob/master/src/main/java/com/huangsu/algorithm/string)
-- [x] 字母表Alphabet
-- [x] 低位优先排序LSD
-- [x] 高位优先排序MSD
-- [x] 三向快速排序QuickStringSort
-- [x] R向查找树符号表TrieStringST
-- [x] R向查找树集合TrieStringSet
-- [x] 三向查找树符号表ThreeWayTrieStringST
-- [x] 三向查找树集合ThreeWayTrieStringSet
-- [x] 子字符串查找暴力算法StringSearchBruteForce
-- [x] 子字符串查找kmp基于dfa算法StringSearchKMPDFA
-- [x] 子字符串查找boyer moore坏字符算法StringSearchBoyerMoore
-- [x] 子字符串查找Rabin Karp指纹字符串算法StringSearchRabinKarp
+- [x] 字母表 Alphabet
+- [x] 低位优先排序 LSD
+- [x] 高位优先排序 MSD
+- [x] 三向快速排序 QuickStringSort
+- [x] R向查找树符号表 TrieStringST
+- [x] R向查找树集合 TrieStringSet
+- [x] 三向查找树符号表 ThreeWayTrieStringST
+- [x] 三向查找树集合 ThreeWayTrieStringSet
+- [x] 子字符串查找暴力算法 StringSearchBruteForce
+- [x] 子字符串查找kmp基于dfa算法 StringSearchKMPDFA
+- [x] 子字符串查找boyer moore坏字符算法 StringSearchBoyerMoore
+- [x] 子字符串查找Rabin Karp指纹字符串算法 StringSearchRabinKarp
 - [ ] 子字符串查找kmp基于不匹配数组算法
 - [ ] 非确定性有限状态机正则表达式匹配
 ### [io相关](https://github.com/huangsu2012/algorithmPractice/blob/master/src/main/java/com/huangsu/algorithm/io)
-- [x] 比特输入流BinaryStdIn
-- [x] 比特输出流BinaryStdOut
-- [x] 二进制转储BinaryDump
-- [x] 十六进制转储HexDump
+- [x] 比特输入流 BinaryStdIn
+- [x] 比特输出流 BinaryStdOut
+- [x] 二进制转储 BinaryDump
+- [x] 十六进制转储 HexDump
 ### [压缩相关](https://github.com/huangsu2012/algorithmPractice/blob/master/src/main/java/com/huangsu/algorithm/compression)
-- [x] 定长编码小字母表压缩SmallAlphabetStringCompression
+- [x] 定长编码小字母表压缩 SmallAlphabetStringCompression
 - [ ] 游程编码压缩
 - [ ] 霍夫曼编码压缩
 - [ ] LZW编码压缩

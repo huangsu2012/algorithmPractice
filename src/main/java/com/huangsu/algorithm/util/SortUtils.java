@@ -68,4 +68,8 @@ public abstract class SortUtils {
     Comparable<? super T> key1Comp = (Comparable<? super T>) key1;
     return key1Comp.compareTo(key2);
   }
+
+  public static <T> int compareTo(int key1, int key2) {
+    return (key1 < key2) ? -1 : ((key1 == key2) ? 0 : 1);
+  }
 }

@@ -3,7 +3,7 @@ package com.huangsu.algorithm.struct.st;
 /**
  * Created by huangsu2012@gmail.com on 2021/5/5.
  *
- * 有序key集合相关抽象
+ * 有序key集合相关查询方法相关抽象
  */
 public interface SetCollectionOrdered<Key> extends SetCollection<Key> {
 
@@ -41,15 +41,7 @@ public interface SetCollectionOrdered<Key> extends SetCollection<Key> {
    */
   Key select(int k);
 
-  /**
-   * 删除最小的键
-   */
-  void deleteMin();
 
-  /**
-   * 删除最大的键
-   */
-  void deleteMax();
 
   /**
    * @param lo 键区间下限；包含

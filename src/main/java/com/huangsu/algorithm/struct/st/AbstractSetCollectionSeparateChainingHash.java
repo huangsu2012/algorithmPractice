@@ -36,8 +36,11 @@ public abstract class AbstractSetCollectionSeparateChainingHash<Key, Value, Node
     this.loadFactor = loadFactor;
   }
 
-  @Override
-  public void delete(Key key) {
+  /**
+   * @param key 要删除的key
+   * @return 被删除的节点或者null（如果没找到的话）
+   */
+  protected Node deleteNode(Key key) {
     int hash = HashUtils.hash(key);
     int index = HashUtils.indexOf(hash, tableLength);
     Node e = table[index];
@@ -60,6 +63,7 @@ public abstract class AbstractSetCollectionSeparateChainingHash<Key, Value, Node
       }
       --size;
     }
+    return finded ? e : null;
   }
 
   @Override

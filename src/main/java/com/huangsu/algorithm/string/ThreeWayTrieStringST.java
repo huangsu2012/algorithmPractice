@@ -29,6 +29,11 @@ public class ThreeWayTrieStringST<Value> extends
   }
 
   @Override
+  public Value delete(String s) {
+    return deleteNode(s);
+  }
+
+  @Override
   protected ThreeWayTrieNodeST<Value> insertCreateNode(Value value) {
     ThreeWayTrieNodeST<Value> node = new ThreeWayTrieNodeST<>();
     node.value = value;

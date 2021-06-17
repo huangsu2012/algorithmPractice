@@ -267,8 +267,8 @@ public abstract class AbstractSkipListOrdered<Key, Value, Node extends SkipListN
     return getNode(key) != null;
   }
 
-  @Override
-  public void delete(Key key) {
+
+  protected Node deleteNode(Key key) {
     Node node = head;
     Node fNode;
     int l = level - 1;
@@ -284,20 +284,15 @@ public abstract class AbstractSkipListOrdered<Key, Value, Node extends SkipListN
         node = fNode;
       }
     }
-    deleteNode(node);
+    return deleteNode(node);
   }
 
-  @Override
-  public void deleteMin() {
-    deleteNode(head.levels[0].forward);
+
+  protected Node deleteMinOrMax(boolean min) {
+    return deleteNode(min ? head.levels[0].forward : maxNode());
   }
 
-  @Override
-  public void deleteMax() {
-    deleteNode(maxNode());
-  }
-
-  private void deleteNode(Node node) {
+  private Node deleteNode(Node node) {
     if (node != null && node != head) {
       int toDelLevel = node.levels.length;
       if (node.levels[0].forward != null) {
@@ -320,6 +315,7 @@ public abstract class AbstractSkipListOrdered<Key, Value, Node extends SkipListN
       }
       --size;
     }
+    return node;
   }
 
 //  /**

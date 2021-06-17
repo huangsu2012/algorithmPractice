@@ -43,4 +43,21 @@ public class BTRecursionOrderedST<Key, Value> extends
     return node == null ? null : node.value;
   }
 
+  @Override
+  public Value delete(Key key) {
+    BTNodeST<Key, Value> node = deleteNode(key);
+    return node != null ? node.value : null;
+  }
+
+  @Override
+  public Value deleteMin() {
+    BTNodeST<Key, Value> node = deleteMinNode();
+    return node != null ? node.value : null;
+  }
+
+  @Override
+  public Value deleteMax() {
+    BTNodeST<Key, Value> node = deleteMaxNode();
+    return node != null ? node.value : null;
+  }
 }

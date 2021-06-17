@@ -1,27 +1,25 @@
 package com.huangsu.algorithm.struct.st;
 
-import com.huangsu.algorithm.struct.Collection;
+import com.huangsu.algorithm.struct.CollectionIterable;
 import java.util.Iterator;
 
 /**
  * Created by huangsu2012@gmail.com on 2021/5/5.
  *
- * 不可重复键集合抽象
+ * 键集合查询方法相关抽象
  */
-public interface SetCollection<Key> extends Collection<Key> {
-
-  void delete(Key key);
+public interface SetCollection<Key> extends CollectionIterable<Key> {
 
   /**
-   * 键key在表中是否存在
+   * 键key在集合中是否存在
    *
    * @param key 键
-   * @return true如果键存在于表中
+   * @return true 如果键存在于集合中
    */
   boolean contains(Key key);
 
   /**
-   * @return 表中所有键的集合
+   * @return 所有键的集合
    */
   Iterable<Key> keys();
 

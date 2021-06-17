@@ -21,40 +21,47 @@ public abstract class AbstractSetCollectionOrderedBinarySearch<Key> extends
   @SuppressWarnings("unchecked")
   public AbstractSetCollectionOrderedBinarySearch(int initialCapacity, Comparator<Key> comparator) {
     super(comparator);
+    if (initialCapacity < 1) {
+      throw new IllegalArgumentException("initialCapacity must gt 0");
+    }
     keys = (Key[]) new Object[initialCapacity];
   }
 
 
   @Override
   public Key min() {
-    return keys[0];
+    return size > 0 ? keys[0] : null;
   }
 
   @Override
   public Key max() {
-    return keys[size - 1];
+    return size > 0 ? keys[size - 1] : null;
   }
 
   @Override
   public Key floor(Key key) {
-    int i = rank(key);
-    if (keys[i].equals(key)) {
-      return key;
-    } else if (i > 0) {
-      return keys[i - 1];
+    if (size > 0) {
+      int i = rank(key);
+      if (keys[i].equals(key)) {
+        return key;
+      } else if (i > 0) {
+        return keys[i - 1];
+      }
     }
     return null;
   }
 
   @Override
   public Key ceiling(Key key) {
-    int i = rank(key);
-    return keys[i];
+    return size > 0 ? keys[rank(key)] : null;
   }
 
   @Override
   public int rank(Key key) {
     int low = 0, high = size - 1, mid = low + (high - low) / 2;
+    if (key == null || size < 1) {
+      return low;
+    }
     while (high >= low) {
       int compareVal = SortUtils.compareTo(keys[mid], key, keyComparator);
       if (compareVal > 0) {
@@ -74,25 +81,12 @@ public abstract class AbstractSetCollectionOrderedBinarySearch<Key> extends
     return k < size && k > -1 ? keys[k] : null;
   }
 
-  @Override
-  public void deleteMin() {
-    for (int i = 1; i < size; i++) {
-      keys[i - 1] = keys[i];
-    }
-    --size;
-  }
-
-  @Override
-  public void deleteMax() {
-    if (size < 1) {
-      return;
-    }
-    keys[size - 1] = null;
-    --size;
-  }
 
   @Override
   public int size(Key lo, Key hi) {
+    if (size < 1) {
+      return 0;
+    }
     int loIndex = rank(lo);
     int hiIndex = rank(hi);
     int offset = keys[hiIndex].equals(hi) ? 1 : 0;
@@ -114,20 +108,8 @@ public abstract class AbstractSetCollectionOrderedBinarySearch<Key> extends
 
 
   @Override
-  public void delete(Key key) {
-    int i = rank(key);
-    if (keys[i].equals(key)) {
-      for (int j = i; j < size - 1; j++) {
-        keys[j] = keys[j + 1];
-      }
-      --size;
-    }
-  }
-
-  @Override
   public boolean contains(Key key) {
-    int i = rank(key);
-    return keys[i].equals(key);
+    return size > 0 && keys[rank(key)].equals(key);
   }
 
   @Override

@@ -1,11 +1,11 @@
 package com.huangsu.algorithm.struct.list;
 
-import com.huangsu.algorithm.struct.Collection;
+import com.huangsu.algorithm.struct.CollectionIterable;
 
 /**
  * Created by huangsu2012@gmail.com on 2021/2/17.
  */
-public interface List<T> extends Collection<T> {
+public interface List<T> extends CollectionIterable<T> {
 
   /**
    * 添加元素到列表

@@ -14,15 +14,17 @@ public abstract class AbstractSetCollectionSequentialSearch<Key, Value, N extend
   protected N head;
   protected int size;
 
-  @Override
-  public void delete(Key key) {
+  protected N deleteNode(Key key) {
+    N toDel = null;
     for (N node = head; node != null; node = node.next) {
       if (node.key.equals(key)) {
+        toDel = node;
         node.prev.next = node.next;
         --size;
         break;
       }
     }
+    return toDel;
   }
 
   @Override

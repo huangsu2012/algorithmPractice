@@ -35,4 +35,9 @@ public class SeparateChainingHashSet<Key> extends
   public boolean add(Key key) {
     return insert(key, null);
   }
+
+  @Override
+  public boolean delete(Key key) {
+    return deleteNode(key) != null;
+  }
 }

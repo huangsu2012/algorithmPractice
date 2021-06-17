@@ -96,12 +96,14 @@ public abstract class AbstractRWayTrieStringSetCollection<Value, Node extends RW
     return addKey;
   }
 
-  @Override
-  public void delete(String s) {
+
+  @SuppressWarnings("unchecked")
+  protected Value deleteNode(String s) {
     Node node = root;
     int i = 0;
     Node lastKeyNode = null;//在查找要删除的键的路径中最后遇到的键的节点
     int lastKeyNodeIndex = -1;//在查找要删除的键的路径中最后遇到的键的节点对应的字符串索引
+    Value value = null;
     for (; i < s.length(); i++) {
       char c = s.charAt(i);
       if (node.next[c] != null) {
@@ -115,6 +117,9 @@ public abstract class AbstractRWayTrieStringSetCollection<Value, Node extends RW
       }
     }
     if (i == s.length()) {
+      if (node instanceof RWayTrieNodeST) {
+        value = ((RWayTrieNodeST<Value>) node).value;
+      }
       insertReplaceNodeValue(node, null);
       node = lastKeyNode;
       if (lastKeyNodeIndex == -1) {
@@ -133,6 +138,7 @@ public abstract class AbstractRWayTrieStringSetCollection<Value, Node extends RW
       }
       --size;
     }
+    return value;
   }
 
   @Override

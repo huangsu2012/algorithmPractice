@@ -1,9 +1,9 @@
 package com.huangsu.algorithm.struct;
 
 /**
- * Created by huangsu2012@gmail.com on 2020/11/10.
+ * Created by huangsu2012@gmail.com on 2021/6/12.
  */
-public interface Collection<T> extends Iterable<T> {
+public interface Collection {
 
   boolean isEmpty();
 

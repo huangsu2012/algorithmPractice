@@ -7,4 +7,13 @@ package com.huangsu.algorithm.struct.st;
  */
 public interface OrderedSet<Key> extends SetCollectionOrdered<Key>, Set<Key> {
 
+  /**
+   * 删除最小的键
+   */
+  Key deleteMin();
+
+  /**
+   * 删除最大的键
+   */
+  Key deleteMax();
 }

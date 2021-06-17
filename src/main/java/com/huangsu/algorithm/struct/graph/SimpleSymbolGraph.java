@@ -1,6 +1,6 @@
 package com.huangsu.algorithm.struct.graph;
 
-import com.huangsu.algorithm.struct.Collection;
+import com.huangsu.algorithm.struct.CollectionIterable;
 import com.huangsu.algorithm.struct.queue.LinkedQueue;
 import com.huangsu.algorithm.struct.queue.Queue;
 import com.huangsu.algorithm.struct.st.ST;
@@ -16,7 +16,7 @@ public class SimpleSymbolGraph<K> implements SymbolGraph<K> {
   private final Graph g;
 
   @SuppressWarnings("unchecked")
-  public SimpleSymbolGraph(Collection<K> vertexes) {
+  public SimpleSymbolGraph(CollectionIterable<K> vertexes) {
     int count = 0;
     symbolIndexTable = new SeparateChainingHashST<>(vertexes.size());
     for (K k : vertexes) {

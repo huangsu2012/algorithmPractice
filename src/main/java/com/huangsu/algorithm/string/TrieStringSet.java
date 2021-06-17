@@ -19,6 +19,13 @@ public class TrieStringSet extends
     return insert(s, null);
   }
 
+  @Override
+  public boolean delete(String s) {
+    int oldSize = size;
+    deleteNode(s);
+    return oldSize > size;
+  }
+
 
   @Override
   protected RWayTrieNodeSet insertCreateNode(Void aVoid) {

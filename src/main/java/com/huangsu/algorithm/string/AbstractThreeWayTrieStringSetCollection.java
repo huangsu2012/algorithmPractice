@@ -189,15 +189,16 @@ public abstract class AbstractThreeWayTrieStringSetCollection<Value, Node extend
     return null;
   }
 
-  @Override
-  public void delete(String s) {
+  @SuppressWarnings("unchecked")
+  protected Value deleteNode(String s) {
     if (s == null) {
-      return;
+      return null;
     }
     Node node = root;
     Node toDelNodeParent = null;
     Node toDelNode = node;
     int i = 0;
+    Value toDelNodeValue = null;
     while (node != null && i < s.length()) {
       char c = s.charAt(i);
       if (node.c == c) {
@@ -220,10 +221,14 @@ public abstract class AbstractThreeWayTrieStringSetCollection<Value, Node extend
     if (i == s.length()) {
       --size;
       if (toDelNodeParent != null && isKeyEndCh(toDelNode)) {
+        if (toDelNode instanceof ThreeWayTrieNodeST) {
+          toDelNodeValue = ((ThreeWayTrieNodeST<Value>) toDelNode).value;
+        }
         toDelNodeParent.eq = null;
         insertReplaceNodeValue(toDelNode, null);
       }
     }
+    return toDelNodeValue;
   }
 
   @Override

@@ -5,24 +5,22 @@ package com.huangsu.algorithm.struct.st;
  */
 public class SetWithST<Key> implements Set<Key> {
 
-  private final ST<Key, Void> st;
+  private final ST<Key, Key> st;
 
-  public SetWithST(ST<Key, Void> st) {
+  public SetWithST(ST<Key, Key> st) {
     this.st = st;
   }
 
   @Override
   public boolean add(Key key) {
-    boolean contains = st.contains(key);
-    if (!contains) {
-      st.put(key, null);
-    }
-    return contains;
+    int oldSize = st.size();
+    st.put(key, key);
+    return st.size() > oldSize;
   }
 
   @Override
-  public void delete(Key key) {
-    st.delete(key);
+  public boolean delete(Key key) {
+    return st.delete(key) != null;
   }
 
   @Override

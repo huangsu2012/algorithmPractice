@@ -48,5 +48,22 @@ public class SkipListOrderedST<Key, Value> extends
     return node == null ? null : node.value;
   }
 
+  @Override
+  public Value delete(Key key) {
+    SkipListNodeST<Key, Value> node = deleteNode(key);
+    return node == null ? null : node.value;
+  }
 
+
+  @Override
+  public Value deleteMin() {
+    SkipListNodeST<Key, Value> node = deleteMinOrMax(true);
+    return node == null ? null : node.value;
+  }
+
+  @Override
+  public Value deleteMax() {
+    SkipListNodeST<Key, Value> node = deleteMinOrMax(false);
+    return node == null ? null : node.value;
+  }
 }

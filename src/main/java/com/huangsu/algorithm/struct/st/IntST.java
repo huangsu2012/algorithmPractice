@@ -1,11 +1,11 @@
 package com.huangsu.algorithm.struct.st;
 
 /**
- * Created by huangsu2012@gmail.com on 2021/2/21.
+ * Created by huangsu2012@gmail.com on 2021/6/12.
  *
- * 符号表抽象
+ * key为int的符号表
  */
-public interface ST<Key, Value> extends SetCollection<Key> {
+public interface IntST<Value> extends IntSetCollection {
 
   /**
    * 将键值对存入表中
@@ -13,7 +13,7 @@ public interface ST<Key, Value> extends SetCollection<Key> {
    * @param key 键
    * @param value 值
    */
-  void put(Key key, Value value);
+  void put(int key, Value value);
 
   /**
    * 获取键key对应的值，若键key不存在返回null
@@ -21,15 +21,15 @@ public interface ST<Key, Value> extends SetCollection<Key> {
    * @param key 键
    * @return 返回对应值或者空
    */
-  Value get(Key key);
+  Value get(int key);
 
   /**
-   * 将键对应的记录从符号表删除
+   * 删除键对应的记录
    *
    * @param key 键
-   * @return null 如果对应的键不存在的话
+   * @return 被删除键对应的value或者null
    */
-  Value delete(Key key);
+  Value delete(int key);
 
 
 }

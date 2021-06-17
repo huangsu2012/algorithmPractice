@@ -1,30 +1,20 @@
 package com.huangsu.algorithm.struct.st;
 
-
 import com.huangsu.algorithm.util.ArrayUtil;
-import java.util.Comparator;
 
 /**
- * Created by huangsu2012@gmail.com on 2021/2/23.
- *
- * 基于二分查找的有序符号表实现
+ * Created by huangsu2012@gmail.com on 2021/6/17.
  */
-public class BinarySearchOrderedST<Key, Value> extends
-    AbstractSetCollectionOrderedBinarySearch<Key> implements
-    OrderedST<Key, Value> {
+public class BinarySearchIntOrderedST<Value> extends
+    AbstractIntSetCollectionOrderedBinarySearch implements IntSTOrdered<Value> {
 
   private Value[] values;
 
-  public BinarySearchOrderedST(int initialCapacity) {
-    this(initialCapacity, null);
-  }
-
   @SuppressWarnings("unchecked")
-  public BinarySearchOrderedST(int initialCapacity, Comparator<Key> comparator) {
-    super(initialCapacity, comparator);
+  public BinarySearchIntOrderedST(int initialCapacity) {
+    super(initialCapacity);
     values = (Value[]) new Object[initialCapacity];
   }
-
 
   @Override
   public Value deleteMin() {
@@ -46,11 +36,10 @@ public class BinarySearchOrderedST<Key, Value> extends
     return value;
   }
 
-
   @Override
-  public void put(Key key, Value value) {
+  public void put(int key, Value value) {
     int i = rank(key);
-    if (keys[i].equals(key)) {
+    if (keys[i] == key) {
       values[i] = value;
       return;
     }
@@ -59,26 +48,25 @@ public class BinarySearchOrderedST<Key, Value> extends
   }
 
   @Override
-  public Value get(Key key) {
+  public Value get(int key) {
     if (size < 1) {
       return null;
     }
     int i = rank(key);
-    if (keys[i].equals(key)) {
+    if (keys[i] == key) {
       return values[i];
     }
     return null;
   }
 
   @Override
-  public Value delete(Key key) {
+  public Value delete(int key) {
     int i = rank(key);
     Value value = null;
-    if (keys[i].equals(key)) {
+    if (keys[i] == key) {
       value = ArrayUtil.delete(keys, values, size, i);
       --size;
     }
     return value;
   }
-
 }

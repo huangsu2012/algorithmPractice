@@ -49,17 +49,6 @@ public abstract class AbstractSetCollectionOrderedBTRBRecursion<Key, Value, Node
   }
 
 
-  @Override
-  public void delete(Key key) {
-
-  }
-
-
-  @Override
-  public void deleteMin() {
-
-  }
-
   private Node deleteMin(Node node) {
     if (node == null || node.left == null) {
       return null;
@@ -74,11 +63,6 @@ public abstract class AbstractSetCollectionOrderedBTRBRecursion<Key, Value, Node
     }
     node.nodeCount = size(node.left) + size(node.right) + 1;
     return node;
-  }
-
-  @Override
-  public void deleteMax() {
-
   }
 
 

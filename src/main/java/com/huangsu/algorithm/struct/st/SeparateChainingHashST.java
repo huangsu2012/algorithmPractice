@@ -42,6 +42,12 @@ public class SeparateChainingHashST<Key, Value> extends
     return null;
   }
 
+  @Override
+  public Value delete(Key key) {
+    NodeHashST<Key, Value> node = deleteNode(key);
+    return node == null ? null : node.value;
+  }
+
   @SuppressWarnings("unchecked")
   @Override
   protected NodeHashST<Key, Value>[] createNewTab(int tableLength) {

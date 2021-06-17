@@ -30,4 +30,22 @@ public class BTOrderedST<Key, Value> extends
     BTNodeWithPST<Key, Value> node = get(key, tree);
     return node == null ? null : node.value;
   }
+
+  @Override
+  public Value delete(Key key) {
+    BTNodeWithPST<Key, Value> node = deleteNode(key);
+    return node == null ? null : node.value;
+  }
+
+  @Override
+  public Value deleteMin() {
+    BTNodeWithPST<Key, Value> node = deleteMinOrMax(true);
+    return node == null ? null : node.value;
+  }
+
+  @Override
+  public Value deleteMax() {
+    BTNodeWithPST<Key, Value> node = deleteMinOrMax(false);
+    return node == null ? null : node.value;
+  }
 }

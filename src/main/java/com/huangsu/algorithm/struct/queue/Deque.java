@@ -1,13 +1,13 @@
 package com.huangsu.algorithm.struct.queue;
 
-import com.huangsu.algorithm.struct.Collection;
+import com.huangsu.algorithm.struct.CollectionIterable;
 
 /**
  * Created by huangsu2012@gmail.com on 2020/11/18.
  *
  * 双向队列
  */
-public interface Deque<T> extends Collection<T> {
+public interface Deque<T> extends CollectionIterable<T> {
 
   /**
    * 向左端添加一个元素

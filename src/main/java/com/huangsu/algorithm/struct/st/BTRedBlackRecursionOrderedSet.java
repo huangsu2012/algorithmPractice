@@ -20,4 +20,19 @@ public class BTRedBlackRecursionOrderedSet<Key> extends
     insert(tree, key, null);
     return oldSize < size(tree);
   }
+
+  @Override
+  public boolean delete(Key key) {
+    return false;
+  }
+
+  @Override
+  public Key deleteMin() {
+    return null;
+  }
+
+  @Override
+  public Key deleteMax() {
+    return null;
+  }
 }

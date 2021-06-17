@@ -1,9 +1,9 @@
-package com.huangsu.algorithm;
+package com.huangsu.algorithm.util;
 
 /**
  * Created by huangsu2012@gmail.com on 2018/3/28.
  */
-public class BinarySearch {
+public class BinarySearchUtil {
 
   /**
    * 查找等于给定元素值的元素

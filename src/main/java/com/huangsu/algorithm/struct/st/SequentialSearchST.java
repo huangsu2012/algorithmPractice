@@ -28,6 +28,12 @@ public class SequentialSearchST<Key, Value> extends
     return null;
   }
 
+  @Override
+  public Value delete(Key key) {
+    NodeST<Key, Value> node = deleteNode(key);
+    return node == null ? null : node.value;
+  }
+
 
   @Override
   protected NodeST<Key, Value> insertCreateNode(Key key, Value value, NodeST<Key, Value> prev,

@@ -1,5 +1,6 @@
 package com.huangsu.algorithm.struct.st;
 
+import com.huangsu.algorithm.util.PairOneType;
 import com.huangsu.algorithm.struct.st.AbstractSetCollectionOrderedBT.AbstractBTNodeWithP;
 import com.huangsu.algorithm.util.SortUtils;
 
@@ -45,9 +46,10 @@ public abstract class AbstractSetCollectionOrderedBTNodeImpl<Key, Value, Node ex
     }
   }
 
-  @Override
-  public void deleteMin() {
-    tree = deleteMinOrMax(tree, true);
+  protected Node deleteMinOrMax(boolean min) {
+    PairOneType<Node> pair = deleteMinOrMax(this.tree, min);
+    this.tree = pair.first;
+    return pair.second;
   }
 
 //  private Node deleteMin(Node tree) {
@@ -70,12 +72,13 @@ public abstract class AbstractSetCollectionOrderedBTNodeImpl<Key, Value, Node ex
 //    return tree;
 //  }
 
-  @Override
-  public void deleteMax() {
-    tree = deleteMinOrMax(tree, false);
-  }
-
-  private Node deleteMinOrMax(Node tree, boolean min) {
+  /**
+   *
+   * @param tree 要删除的子树根结点
+   * @param min true表示子树的最小节点
+   * @return 删除对应节点后的子树以及被删除的节点
+   */
+  private PairOneType<Node> deleteMinOrMax(Node tree, boolean min) {
     if (tree == null) {
       return null;
     }
@@ -110,11 +113,12 @@ public abstract class AbstractSetCollectionOrderedBTNodeImpl<Key, Value, Node ex
     } else {
       tree = min ? node.right : node.left;
     }
+    Node result = node;
     while (node != null) {
       node.nodeCount = size(node.left) + size(node.right) + 1;
       node = node.parent;
     }
-    return tree;
+    return new PairOneType<>(tree, result);
   }
 
 //  private Node deleteMax(Node tree) {
@@ -137,12 +141,12 @@ public abstract class AbstractSetCollectionOrderedBTNodeImpl<Key, Value, Node ex
 //    return tree;
 //  }
 
-  @Override
-  public void delete(Key key) {
-    tree = delete(key, tree);
-  }
-
-  private Node delete(Key key, Node tree) {
+  /**
+   * 删除key对应的节点
+   * @param key 要删除的key
+   * @return 被删除的节点
+   */
+  protected Node deleteNode(Key key) {
     if (tree == null) {
       return null;
     }
@@ -163,7 +167,7 @@ public abstract class AbstractSetCollectionOrderedBTNodeImpl<Key, Value, Node ex
         Node t = node;
         node = min(t.right);
         node.left = t.left;
-        node.right = deleteMinOrMax(t.right, true);
+        node.right = deleteMinOrMax(t.right, true).first;
         node.parent = t.parent;
         node.left.parent = node;
         if (node.right != null) {
@@ -182,11 +186,12 @@ public abstract class AbstractSetCollectionOrderedBTNodeImpl<Key, Value, Node ex
         tree = deleteSingleChildNode(tree, node);
       }
     }
+    Node result = node;
     while (node != null) {
       node.nodeCount = size(node.left) + size(node.right) + 1;
       node = node.parent;
     }
-    return tree;
+    return result;
   }
 
   private Node deleteSingleChildNode(Node tree,

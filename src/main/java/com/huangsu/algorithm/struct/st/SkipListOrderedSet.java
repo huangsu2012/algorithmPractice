@@ -40,7 +40,24 @@ public class SkipListOrderedSet<Key> extends
   }
 
   @Override
+  public boolean delete(Key key) {
+    return deleteNode(key) != null;
+  }
+
+  @Override
   public Iterator<Key> iterator() {
     return keys().iterator();
+  }
+
+  @Override
+  public Key deleteMin() {
+    SkipListNodeSet<Key> node = deleteMinOrMax(true);
+    return node == null ? null : node.key;
+  }
+
+  @Override
+  public Key deleteMax() {
+    SkipListNodeSet<Key> node = deleteMinOrMax(false);
+    return node == null ? null : node.key;
   }
 }

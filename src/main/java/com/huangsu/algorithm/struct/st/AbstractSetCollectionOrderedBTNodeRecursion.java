@@ -2,6 +2,7 @@ package com.huangsu.algorithm.struct.st;
 
 import com.huangsu.algorithm.struct.st.AbstractSetCollectionOrderedBT.AbstractBTNode;
 import com.huangsu.algorithm.util.SortUtils;
+import com.huangsu.algorithm.util.ValueHolder;
 import java.util.Comparator;
 
 /**
@@ -39,55 +40,66 @@ public abstract class AbstractSetCollectionOrderedBTNodeRecursion<Key, Value, No
   }
 
 
-  @Override
-  public void deleteMin() {
-    tree = deleteMin(tree);
+  protected Node deleteMinNode() {
+    ValueHolder<Node> delNode = new ValueHolder<>();
+    tree = deleteMinNode(tree, delNode);
+    return delNode.value;
   }
 
-  private Node deleteMin(Node node) {
+  private Node deleteMinNode(Node node, ValueHolder<Node> delNode) {
     if (node == null) {
       return null;
     }
     if (node.left == null) {
+      if (delNode != null) {
+        delNode.value = node;
+      }
       return node.right;
     }
-    node.left = deleteMin(node.left);
+    node.left = deleteMinNode(node.left, delNode);
     node.nodeCount = size(node.left) + size(node.right) + 1;
     return node;
   }
 
-  @Override
-  public void deleteMax() {
-    tree = deleteMax(tree);
+  protected Node deleteMaxNode() {
+    ValueHolder<Node> delNode = new ValueHolder<>();
+    tree = deleteMaxNode(tree, delNode);
+    return delNode.value;
   }
 
-  private Node deleteMax(Node node) {
+  private Node deleteMaxNode(Node node, ValueHolder<Node> delNode) {
     if (node == null) {
       return null;
     }
     if (node.right == null) {
+      if (delNode != null) {
+        delNode.value = node;
+      }
       return node.left;
     }
-    node.right = deleteMin(node.right);
+    node.right = deleteMaxNode(node.right, delNode);
     node.nodeCount = size(node.left) + size(node.right) + 1;
     return node;
   }
 
-  @Override
-  public void delete(Key key) {
-    tree = delete(key, tree);
+
+  protected Node deleteNode(Key key) {
+    ValueHolder<Node> delNode = new ValueHolder<>();
+    tree = deleteNode(key, tree, delNode);
+    return delNode.value;
   }
 
-  private Node delete(Key key, Node node) {
+  private Node deleteNode(Key key, Node node, ValueHolder<Node> delNode) {
     if (node == null) {
       return null;
     }
     int compareVal = SortUtils.compareTo(node.key, key, keyComparator);
     if (compareVal > 0) {
-      node.left = delete(key, node.left);
+      node.left = deleteNode(key, node.left, delNode);
     } else if (compareVal < 0) {
-      node.right = delete(key, node.right);
+      node.right = deleteNode(key, node.right, delNode);
     } else {
+      delNode.value = node;
       if (node.right == null) {
         return node.left;
       }
@@ -97,7 +109,7 @@ public abstract class AbstractSetCollectionOrderedBTNodeRecursion<Key, Value, No
       Node t = node;
       node = min(t.right);
       node.left = t.left;
-      node.right = deleteMin(t.right);
+      node.right = deleteMinNode(t.right, null);
     }
     node.nodeCount = size(node.left) + size(node.right) + 1;
     return node;

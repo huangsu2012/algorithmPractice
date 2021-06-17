@@ -19,4 +19,22 @@ public class BTOrderedSet<Key> extends
     insert(key, null);
     return oldSize < size(tree);
   }
+
+  @Override
+  public boolean delete(Key key) {
+    BTNodeWithP<Key> node = deleteNode(key);
+    return node != null;
+  }
+
+  @Override
+  public Key deleteMin() {
+    BTNodeWithP<Key> node = deleteMinOrMax(true);
+    return node == null ? null : node.key;
+  }
+
+  @Override
+  public Key deleteMax() {
+    BTNodeWithP<Key> node = deleteMinOrMax(false);
+    return node == null ? null : node.key;
+  }
 }

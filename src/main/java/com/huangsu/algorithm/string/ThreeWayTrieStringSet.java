@@ -16,6 +16,13 @@ public class ThreeWayTrieStringSet extends
   }
 
   @Override
+  public boolean delete(String s) {
+    int oldSize = size;
+    deleteNode(s);
+    return oldSize > size;
+  }
+
+  @Override
   protected ThreeWayTrieNodeSet insertCreateNode(Void aVoid) {
     return new ThreeWayTrieNodeSet();
   }

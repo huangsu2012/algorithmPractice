@@ -27,6 +27,11 @@ public class TrieStringST<Value> extends
     return node == null ? null : node.value;
   }
 
+  @Override
+  public Value delete(String s) {
+    return deleteNode(s);
+  }
+
 
   @Override
   protected RWayTrieNodeST<Value> insertCreateNode(Value value) {

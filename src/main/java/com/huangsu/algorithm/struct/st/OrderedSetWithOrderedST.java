@@ -5,9 +5,9 @@ package com.huangsu.algorithm.struct.st;
  */
 public class OrderedSetWithOrderedST<Key> implements OrderedSet<Key> {
 
-  private final OrderedST<Key, Void> st;
+  private final OrderedST<Key, Key> st;
 
-  public OrderedSetWithOrderedST(OrderedST<Key, Void> st) {
+  public OrderedSetWithOrderedST(OrderedST<Key, Key> st) {
     this.st = st;
   }
 
@@ -42,13 +42,13 @@ public class OrderedSetWithOrderedST<Key> implements OrderedSet<Key> {
   }
 
   @Override
-  public void deleteMin() {
-    st.deleteMin();
+  public Key deleteMin() {
+    return st.deleteMin();
   }
 
   @Override
-  public void deleteMax() {
-    st.deleteMax();
+  public Key deleteMax() {
+    return st.deleteMax();
   }
 
   @Override
@@ -63,16 +63,14 @@ public class OrderedSetWithOrderedST<Key> implements OrderedSet<Key> {
 
   @Override
   public boolean add(Key key) {
-    boolean contains = st.contains(key);
-    if (!contains) {
-      st.put(key, null);
-    }
-    return contains;
+    int oldSize = st.size();
+    st.put(key, key);
+    return st.size() > oldSize;
   }
 
   @Override
-  public void delete(Key key) {
-    st.delete(key);
+  public boolean delete(Key key) {
+    return st.delete(key) != null;
   }
 
   @Override

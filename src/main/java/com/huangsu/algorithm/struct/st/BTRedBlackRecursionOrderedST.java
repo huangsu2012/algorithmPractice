@@ -24,7 +24,22 @@ public class BTRedBlackRecursionOrderedST<Key, Value> extends
   }
 
   @Override
+  public Value delete(Key key) {
+    return null;
+  }
+
+  @Override
   protected BTNodeRedBlackST<Key, Value> insertCreateNode(Key key, Value value) {
     return new BTNodeRedBlackST<>(key, value, 1);
+  }
+
+  @Override
+  public Value deleteMin() {
+    return null;
+  }
+
+  @Override
+  public Value deleteMax() {
+    return null;
   }
 }
